@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: url(../images/login_bg.jpg) no-repeat;
+    background-size: cover;
+    /*可以覆盖整个容器*/
+}
+
+.logo {
+    position: absolute;
+    left: 40px;
+    top: 20px;
+}
+
+.content {
+    position: absolute;
+    padding: 0 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 310px;
+    background-color: #fff;
+}
+
+.content .title {
+    height: 60px;
+    padding: 0 30px;
+    /* 给父盒子设置flex布局，主侧轴设置居中对齐 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link a {
+    float: right;
+}
+
+.layui-form-item {
+    position: relative;
+}
+
+.layui-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.layui-input {
+    padding-left: 35px;
+}
