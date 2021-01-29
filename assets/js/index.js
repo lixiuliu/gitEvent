@@ -15,7 +15,7 @@ $(function() {
             const name = data.nickname || data.username
             $('.nickname').text(`欢迎${name}`).show()
                 // 渲染头像
-            if (data.usre_pic) {
+            if (data.user_pic) {
                 $('.avater').prop('src', data.user_pic).show()
                 $('text-avater').hide()
             } else {

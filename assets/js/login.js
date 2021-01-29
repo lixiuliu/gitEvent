@@ -17,19 +17,20 @@ $(function() {
         }
     })
     $('.reg-form').submit(function(e) {
-            e.preventDefault()
-            axios.post('/api/reguser', $(this).serialize())
-                .then(res => {
-                    console.log(res);
-                    if (res.status !== 0) {
-                        return layer.msg('注册失败!')
-                    }
-                    // 自动跳转到登录
-                    layer.msg('注册成功!')
-                    $('.login-form a').click()
-                })
-        })
-        // 4.登录功能
+        e.preventDefault()
+        axios.post('/api/reguser', $(this).serialize())
+            .then(res => {
+                console.log(res);
+                if (res.status !== 0) {
+                    return layer.msg('注册失败!')
+                }
+                // 自动跳转到登录
+                layer.msg('注册成功!')
+                $('.login-form a').click()
+            })
+    })
+
+    // 4.登录功能
     $('.login-form').submit(function(e) {
         e.preventDefault()
         axios.post('/api/login', $(this).serialize())
