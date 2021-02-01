@@ -104,7 +104,7 @@
             <td>{{$value.alias}}</td>
             <td>
                 <button data-id="{{$value.Id}}" type="button" class="edit-btn layui-btn  layui-btn-xs">编辑</button>
-                <button type="button" class=" layui-btn  layui-btn-xs layui-btn-danger ">删除</button>
+                <button data-id="{{$value.Id}}" type="button" class="del-btn layui-btn  layui-btn-xs layui-btn-danger ">删除</button>
             </td>
         </tr>
         {{/each}}

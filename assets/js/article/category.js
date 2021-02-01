@@ -87,4 +87,22 @@ $(function() {
 
         })
     })
+
+    // 点击删除按钮
+    $(document).on('click', '.del-btn', function() {
+        const id = $(this).data('id')
+        console.log(id);
+        layer.confirm('确定删除?', { icon: 3, title: '提示' }, function(index) {
+            //do something
+            axios.get(`/my/article/deletecate/${id}`).then(res => {
+                if (res.status !== 0) {
+                    return layer.msg('删除失败')
+                }
+                layer.msg('删除成功')
+                getCateList()
+            })
+            layer.close(index);
+        });
+
+    })
 })
