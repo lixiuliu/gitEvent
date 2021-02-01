@@ -3,23 +3,25 @@ $(function() {
     const $image = $('#image')
         // 2.初始化裁剪区域 cropper()
     $image.cropper({
-            // 指定的长度比
-            aspectRatio: 1,
-            // 裁剪事件
-            crop: function(event) {
-                // 裁剪区的坐标位置
-                // console.log(event.detail.x);
-                // console.log(event.detail.y);
-            },
-            // 指定预览区，提供元素的选择器
-            preview: '.img-preview'
-        })
-        // 3.点击上传按钮，上传图片
+        // 指定的长度比
+        aspectRatio: 1,
+        // 裁剪事件
+        crop: function(event) {
+            // 裁剪区的坐标位置
+            // console.log(event.detail.x);
+            // console.log(event.detail.y);
+        },
+        // 指定预览区，提供元素的选择器
+        preview: '.img-preview'
+    })
+
+    // 3.点击上传按钮，上传图片
     $('#upload-btn').click(function() {
-            // 3.1手动触发文件框的点击事件
-            $('#file').click()
-        })
-        // 4.监听文件框状态改变事件 change:file,checkbox,select
+        // 3.1手动触发文件框的点击事件
+        $('#file').click()
+    })
+
+    // 4.监听文件框状态改变事件 change:file,checkbox,select
     $('#file').change(function() {
             // 4.1获取用户上传的文件列表
             console.log(this.files); //伪数组
