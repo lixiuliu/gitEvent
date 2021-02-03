@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../assets/lib/moment.js"></script>
     <link rel="stylesheet" href="../assets/lib/layui/css/layui.css">
     <link rel="stylesheet" href="../assets/css/category.css">
 </head>
@@ -79,7 +80,7 @@
         <tr>
             <td>{{$value.title}}</td>
             <td>{{$value.cate_name}}</td>
-            <td>{{$value.pub_date}}</td>
+            <td>{{$value.pub_date| dateFormat}}</td>
             <td>{{$value.state}}</td>
             <td>
                 <button data-id="{{$value.Id}}" type="button" class="edit-btn layui-btn  layui-btn-xs">编辑</button>

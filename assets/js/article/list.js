@@ -36,6 +36,11 @@ $(function() {
             if (res.status !== 0) {
                 return layer.msg('获取失败')
             }
+            // 调用模板函数之前
+            template.defaults.imports.dateFormat = function(date) {
+                return moment(date).format('YYYY/MM/DD HH:mm:ss');
+            };
+
             // 3.2使用模板引擎来渲染
             const htmlStr = template('tpl', res)
                 // console.log(htmlStr);
@@ -78,31 +83,45 @@ $(function() {
             // 5.2把获取到的值重新赋值给query对象
             query.cate_id = cate_id
             query.state = state
+                //细节： 发送请求之前去修改页码值为第一页
+            query.pagenum = 1
                 // 5.3重新调用renderTable
             renderTable()
         })
         // 6.点击删除按钮，删除当前的文章
-        // 点击删除按钮
+        // 点击删除按钮（非首页最后一条数据, 删除时页码值减1 ）
     $(document).on('click', '.del-btn', function() {
+            const id = $(this).data('id')
+            console.log(id);
+            layer.confirm('确定删除?', { icon: 3, title: '提示' }, function(index) {
+                //do something
+                axios.get(`/my/article/delete/${id}`).then(res => {
+                    if (res.status !== 0) {
+                        return layer.msg('删除失败')
+                    }
+                    // 提示成功
+                    layer.msg('删除成功')
+                        // 填坑处理：当前页只有一条数据且不处在第一页的时候，那么我们点击删除这个数据之后，应该手动更新上一页的数据
+
+                    if ($('.del-btn').length == 1 && query.pagenum !== 1) {
+                        query.pagenum = query.pagenum - 1
+                    }
+                    renderTable()
+                })
+                layer.close(index);
+            });
+
+        })
+        // 7.点击编辑按钮，跳转到文章编辑页面
+    $(document).on('click', '.edit-btn', function() {
+        // 获取当前文章
         const id = $(this).data('id')
-        console.log(id);
-        layer.confirm('确定删除?', { icon: 3, title: '提示' }, function(index) {
-            //do something
-            axios.get(`/my/article/delete/${id}`).then(res => {
-                if (res.status !== 0) {
-                    return layer.msg('删除失败')
-                }
-                // 提示成功
-                layer.msg('删除成功')
-                    // 填坑处理：当前页只有一条数据且不处在第一页的时候，那么我们点击删除这个数据之后，应该手动更新上一页的数据
-
-                if ($('.del-btn').length == 1 && query.pagenum !== 1) {
-                    query.pagenum = query.pagenum - 1
-                }
-                renderTable()
-            })
-            layer.close(index);
-        });
-
+            // 如果在两个页面之间进行数据传递：使用参数查询?name=tom&age=10
+        location.href = `./edit.html?id=${id}`
+            // 左边导航条更新，自动触发发表文章链接的a
+        window.parent.$('.layui-this').next().find('a').click()
     })
+
+
+
 })
